@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below
+  // Further reading:
+  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
+  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string
+  url      = env("DATABASE_URL")
+}
+
+model Reservation {
+  id String @id @default(uuid())
+
+  name      String
+  email     String
+  phone     String
+  packageId String
+  date      DateTime
+  time      String
+  location  String
+  price     Int
+  paid      PaidStatus @default(PENDING)
+  paidAt    DateTime?
+
+  createdAt DateTime  @default(now())
+  updateAt  DateTime? @updatedAt
+}
+
+enum PaidStatus {
+  PENDING
+  PAID
+}
