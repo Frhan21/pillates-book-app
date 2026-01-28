@@ -123,6 +123,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.ReservationScalarFieldEnum = {
   id: 'id',
+  orderId: 'orderId',
   name: 'name',
   email: 'email',
   phone: 'phone',
@@ -153,7 +154,8 @@ exports.Prisma.NullsOrder = {
 };
 exports.PaidStatus = exports.$Enums.PaidStatus = {
   PENDING: 'PENDING',
-  PAID: 'PAID'
+  PAID: 'PAID',
+  FAILED: 'FAILED'
 };
 
 exports.Prisma.ModelName = {

@@ -18,6 +18,7 @@ datasource db {
 model Reservation {
     id String @id @default(uuid())
 
+    orderId   String    @unique
     name      String
     email     String
     phone     String
@@ -36,4 +37,5 @@ model Reservation {
 enum PaidStatus {
     PENDING
     PAID
+    FAILED
 }

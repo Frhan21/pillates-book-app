@@ -3,48 +3,8 @@
 import { CheckCheck, Stars } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
-
-const plans = [
-  {
-    name: "Single Session",
-    price: "Rp 150.000",
-    description: "Perfect for trying out our studio",
-    features: [
-      "1 Pilates session",
-      "Access to any court",
-      "Equipment included",
-      "Locker access",
-    ],
-    popular: false,
-  },
-  {
-    name: "Monthly Package",
-    price: "Rp 1.200.000",
-    description: "Best value for regular practice",
-    features: [
-      "10 Pilates sessions",
-      "Priority booking",
-      "All equipment included",
-      "Free locker rental",
-      "1 free guest pass",
-    ],
-    popular: true,
-  },
-  {
-    name: "Unlimited",
-    price: "Rp 2.500.000",
-    description: "For the dedicated practitioner",
-    features: [
-      "Unlimited sessions",
-      "VIP court access",
-      "Personal locker",
-      "Complimentary drinks",
-      "3 guest passes",
-      "Priority support",
-    ],
-    popular: false,
-  },
-];
+import { packages } from "~/constant/package";
+import { toRupiah } from "~/lib/toRupiah";
 
 const Pricing = () => {
   return (
@@ -61,14 +21,14 @@ const Pricing = () => {
 
         {/* Card Pricing */}
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-          {plans.map((plan, idx) => (
+          {packages.map((plan, idx) => (
             <Card
               className={`relative h-full overflow-hidden rounded-2xl transition-all ${plan.popular ? "border-primary border-2 md:scale-105" : "border-border border"} `}
               key={idx}
             >
               {plan.popular && (
                 <div className="bg-primary text-primary-foreground absolute top-0 right-0 rounded-bl-lg px-6 py-2 text-sm font-semibold">
-                  <span className="flex items-center gap-2 justify-center">
+                  <span className="flex items-center justify-center gap-2">
                     <Stars fill="#ffffff" className="h-6 w-6" /> Recommended
                   </span>
                 </div>
@@ -81,9 +41,11 @@ const Pricing = () => {
 
                 <div className="mb-8">
                   <span className="text-primary text-4xl font-bold">
-                    {plan.price}
+                    {toRupiah(plan.fixedPrice)}
                   </span>
-                  <span className="text-muted-foreground">/month</span>
+                  <span className="text-muted-foreground">
+                    /{plan.duration}
+                  </span>
                 </div>
 
                 <ul className="mb-8 space-y-4">

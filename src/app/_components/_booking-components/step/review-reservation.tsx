@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form";
+import { packages } from "~/constant/package";
 import type { BookingFormSchema } from "~/forms/booking";
 import { toRupiah } from "~/lib/toRupiah";
-import { packages } from "./package-form";
 
 const ReviewPage = () => {
   const { getValues } = useFormContext<BookingFormSchema>();

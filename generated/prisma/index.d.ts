@@ -25,7 +25,8 @@ export type Reservation = $Result.DefaultSelection<Prisma.$ReservationPayload>
 export namespace $Enums {
   export const PaidStatus: {
   PENDING: 'PENDING',
-  PAID: 'PAID'
+  PAID: 'PAID',
+  FAILED: 'FAILED'
 };
 
 export type PaidStatus = (typeof PaidStatus)[keyof typeof PaidStatus]
@@ -900,6 +901,7 @@ export namespace Prisma {
 
   export type ReservationMinAggregateOutputType = {
     id: string | null
+    orderId: string | null
     name: string | null
     email: string | null
     phone: string | null
@@ -916,6 +918,7 @@ export namespace Prisma {
 
   export type ReservationMaxAggregateOutputType = {
     id: string | null
+    orderId: string | null
     name: string | null
     email: string | null
     phone: string | null
@@ -932,6 +935,7 @@ export namespace Prisma {
 
   export type ReservationCountAggregateOutputType = {
     id: number
+    orderId: number
     name: number
     email: number
     phone: number
@@ -958,6 +962,7 @@ export namespace Prisma {
 
   export type ReservationMinAggregateInputType = {
     id?: true
+    orderId?: true
     name?: true
     email?: true
     phone?: true
@@ -974,6 +979,7 @@ export namespace Prisma {
 
   export type ReservationMaxAggregateInputType = {
     id?: true
+    orderId?: true
     name?: true
     email?: true
     phone?: true
@@ -990,6 +996,7 @@ export namespace Prisma {
 
   export type ReservationCountAggregateInputType = {
     id?: true
+    orderId?: true
     name?: true
     email?: true
     phone?: true
@@ -1093,6 +1100,7 @@ export namespace Prisma {
 
   export type ReservationGroupByOutputType = {
     id: string
+    orderId: string
     name: string
     email: string
     phone: string
@@ -1128,6 +1136,7 @@ export namespace Prisma {
 
   export type ReservationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    orderId?: boolean
     name?: boolean
     email?: boolean
     phone?: boolean
@@ -1144,6 +1153,7 @@ export namespace Prisma {
 
   export type ReservationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    orderId?: boolean
     name?: boolean
     email?: boolean
     phone?: boolean
@@ -1160,6 +1170,7 @@ export namespace Prisma {
 
   export type ReservationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    orderId?: boolean
     name?: boolean
     email?: boolean
     phone?: boolean
@@ -1176,6 +1187,7 @@ export namespace Prisma {
 
   export type ReservationSelectScalar = {
     id?: boolean
+    orderId?: boolean
     name?: boolean
     email?: boolean
     phone?: boolean
@@ -1190,13 +1202,14 @@ export namespace Prisma {
     updateAt?: boolean
   }
 
-  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "packageId" | "date" | "time" | "location" | "price" | "paid" | "paidAt" | "createdAt" | "updateAt", ExtArgs["result"]["reservation"]>
+  export type ReservationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "orderId" | "name" | "email" | "phone" | "packageId" | "date" | "time" | "location" | "price" | "paid" | "paidAt" | "createdAt" | "updateAt", ExtArgs["result"]["reservation"]>
 
   export type $ReservationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Reservation"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      orderId: string
       name: string
       email: string
       phone: string
@@ -1633,6 +1646,7 @@ export namespace Prisma {
    */
   interface ReservationFieldRefs {
     readonly id: FieldRef<"Reservation", 'String'>
+    readonly orderId: FieldRef<"Reservation", 'String'>
     readonly name: FieldRef<"Reservation", 'String'>
     readonly email: FieldRef<"Reservation", 'String'>
     readonly phone: FieldRef<"Reservation", 'String'>
@@ -2027,6 +2041,7 @@ export namespace Prisma {
 
   export const ReservationScalarFieldEnum: {
     id: 'id',
+    orderId: 'orderId',
     name: 'name',
     email: 'email',
     phone: 'phone',
@@ -2151,6 +2166,7 @@ export namespace Prisma {
     OR?: ReservationWhereInput[]
     NOT?: ReservationWhereInput | ReservationWhereInput[]
     id?: StringFilter<"Reservation"> | string
+    orderId?: StringFilter<"Reservation"> | string
     name?: StringFilter<"Reservation"> | string
     email?: StringFilter<"Reservation"> | string
     phone?: StringFilter<"Reservation"> | string
@@ -2167,6 +2183,7 @@ export namespace Prisma {
 
   export type ReservationOrderByWithRelationInput = {
     id?: SortOrder
+    orderId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -2183,6 +2200,7 @@ export namespace Prisma {
 
   export type ReservationWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    orderId?: string
     AND?: ReservationWhereInput | ReservationWhereInput[]
     OR?: ReservationWhereInput[]
     NOT?: ReservationWhereInput | ReservationWhereInput[]
@@ -2198,10 +2216,11 @@ export namespace Prisma {
     paidAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
     createdAt?: DateTimeFilter<"Reservation"> | Date | string
     updateAt?: DateTimeNullableFilter<"Reservation"> | Date | string | null
-  }, "id">
+  }, "id" | "orderId">
 
   export type ReservationOrderByWithAggregationInput = {
     id?: SortOrder
+    orderId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -2226,6 +2245,7 @@ export namespace Prisma {
     OR?: ReservationScalarWhereWithAggregatesInput[]
     NOT?: ReservationScalarWhereWithAggregatesInput | ReservationScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Reservation"> | string
+    orderId?: StringWithAggregatesFilter<"Reservation"> | string
     name?: StringWithAggregatesFilter<"Reservation"> | string
     email?: StringWithAggregatesFilter<"Reservation"> | string
     phone?: StringWithAggregatesFilter<"Reservation"> | string
@@ -2242,6 +2262,7 @@ export namespace Prisma {
 
   export type ReservationCreateInput = {
     id?: string
+    orderId: string
     name: string
     email: string
     phone: string
@@ -2258,6 +2279,7 @@ export namespace Prisma {
 
   export type ReservationUncheckedCreateInput = {
     id?: string
+    orderId: string
     name: string
     email: string
     phone: string
@@ -2274,6 +2296,7 @@ export namespace Prisma {
 
   export type ReservationUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -2290,6 +2313,7 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -2306,6 +2330,7 @@ export namespace Prisma {
 
   export type ReservationCreateManyInput = {
     id?: string
+    orderId: string
     name: string
     email: string
     phone: string
@@ -2322,6 +2347,7 @@ export namespace Prisma {
 
   export type ReservationUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -2338,6 +2364,7 @@ export namespace Prisma {
 
   export type ReservationUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    orderId?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
@@ -2414,6 +2441,7 @@ export namespace Prisma {
 
   export type ReservationCountOrderByAggregateInput = {
     id?: SortOrder
+    orderId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -2434,6 +2462,7 @@ export namespace Prisma {
 
   export type ReservationMaxOrderByAggregateInput = {
     id?: SortOrder
+    orderId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
@@ -2450,6 +2479,7 @@ export namespace Prisma {
 
   export type ReservationMinOrderByAggregateInput = {
     id?: SortOrder
+    orderId?: SortOrder
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder

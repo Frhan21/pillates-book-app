@@ -7,6 +7,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
+    MIDTRANS_SERVER_KEY: z.string(),
     AUTH_SECRET:
       process.env.NODE_ENV === "production"
         ? z.string()
@@ -25,6 +26,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
+    NEXT_PUBLIC_MIDTRANS_CLIENT_KEY: z.string(),
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -33,6 +35,9 @@ export const env = createEnv({
    * middlewares) or client-side so we need to destruct manually.
    */
   runtimeEnv: {
+    MIDTRANS_SERVER_KEY: process.env.MIDTRANS_SERVER_KEY,
+    NEXT_PUBLIC_MIDTRANS_CLIENT_KEY:
+      process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY,
     AUTH_SECRET: process.env.AUTH_SECRET,
     // AUTH_DISCORD_ID: process.env.AUTH_DISCORD_ID,
     // AUTH_DISCORD_SECRET: process.env.AUTH_DISCORD_SECRET,

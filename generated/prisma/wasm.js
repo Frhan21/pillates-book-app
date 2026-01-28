@@ -95,6 +95,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.ReservationScalarFieldEnum = {
   id: 'id',
+  orderId: 'orderId',
   name: 'name',
   email: 'email',
   phone: 'phone',
@@ -125,7 +126,8 @@ exports.Prisma.NullsOrder = {
 };
 exports.PaidStatus = exports.$Enums.PaidStatus = {
   PENDING: 'PENDING',
-  PAID: 'PAID'
+  PAID: 'PAID',
+  FAILED: 'FAILED'
 };
 
 exports.Prisma.ModelName = {
@@ -178,13 +180,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below\n  // Further reading:\n  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema\n  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Reservation {\n  id String @id @default(uuid())\n\n  name      String\n  email     String\n  phone     String\n  packageId String\n  date      DateTime\n  time      String\n  location  String\n  price     Int\n  paid      PaidStatus @default(PENDING)\n  paidAt    DateTime?\n\n  createdAt DateTime  @default(now())\n  updateAt  DateTime? @updatedAt\n}\n\nenum PaidStatus {\n  PENDING\n  PAID\n}\n",
-  "inlineSchemaHash": "e7370747f8f7057233491a1f892f04f273300e8be244b3f02bc8852ff088e1a1",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  // NOTE: When using mysql or sqlserver, uncomment the @db.Text annotations in model Account below\n  // Further reading:\n  // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema\n  // https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#string\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Reservation {\n  id String @id @default(uuid())\n\n  orderId   String     @unique\n  name      String\n  email     String\n  phone     String\n  packageId String\n  date      DateTime\n  time      String\n  location  String\n  price     Int\n  paid      PaidStatus @default(PENDING)\n  paidAt    DateTime?\n\n  createdAt DateTime  @default(now())\n  updateAt  DateTime? @updatedAt\n}\n\nenum PaidStatus {\n  PENDING\n  PAID\n  FAILED\n}\n",
+  "inlineSchemaHash": "e6f6f70102ededdfc587b57e73d7fe77f716a763a34075b685d2024eaf783d3f",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Reservation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"time\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"paid\",\"kind\":\"enum\",\"type\":\"PaidStatus\"},{\"name\":\"paidAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updateAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Reservation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"orderId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"date\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"time\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"paid\",\"kind\":\"enum\",\"type\":\"PaidStatus\"},{\"name\":\"paidAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updateAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
